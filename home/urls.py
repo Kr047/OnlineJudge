@@ -1,5 +1,5 @@
 from django.urls import path, include
-from home.views import home_scr
+from home.views import all_probs
 urlpatterns = [
-    path("homescreen/", home_scr, name = "home_scr"),
+    path("homescreen/", all_probs, name = "all_probs"),
 ]

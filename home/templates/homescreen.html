@@ -2,18 +2,17 @@
 <html lang="en">
     <head>
     <meta charset="UTF-8" />
-    <title>polls</title>
+    <title>Problems</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content="" />
     <link rel="icon" href="favicon.png" />
   </head>
   <body>
-    <h1>All polls</h1>
-
+    <h1>Problem List</h1>
     <ul>
-      {% for poll in all_polls %}
+      {% for prob in all_probs %}
 
-      <li><a href="/home/polls/{{poll.id}}/">{{poll.statement}}</a></li>
+      <li><a href="/home/homescreen/{{problem.id}}/">{{prob}}</a></li>
 
       {% endfor %}
     </ul>
