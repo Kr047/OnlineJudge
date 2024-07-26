@@ -1,0 +1,14 @@
+{% load crispy_forms_tags %}
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href ="https://bootswatch.com/5/lux/bootstrap.min.css">
+    </head>
+    <div class="container">
+        <h1>Code Compiler</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit">Run Code</button>
+        </form>
+    </div>
+</html>
