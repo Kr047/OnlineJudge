@@ -29,6 +29,26 @@ def submit(request):
         }
     return render(request,"index.html",context)
 
+def judge(request):
+    if request.method == "POST":
+        form = CodeSubmissionForm(request.POST)
+        if form.is_valid():
+            test = form.save()
+            print(test.language)
+            print(test.code)
+            output = run_code(
+                test.language, test.code, test.testcases_input_data
+            )
+            test.tescases_output_data = output
+            test.save()
+            return render(request,"result.html",{"test":test})
+    else:
+        form = CodeSubmissionForm()
+        context = {
+            "form":form,
+        }
+    return render(request,"index.html",context)
+
 def run_code(language,code,input_data):
     project_path = Path(settings.BASE_DIR)
     directories = ["codes","inputs","outputs"]
