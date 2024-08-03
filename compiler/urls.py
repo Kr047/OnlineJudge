@@ -2,5 +2,5 @@ from django.urls import path
 from compiler.views import submit
 
 urlpatterns = [
-    path("",submit, name = "submit"),
+    path("2-Sum/",submit, name = "submit"),
 ]

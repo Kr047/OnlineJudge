@@ -1,18 +1,27 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from home.models import problem
 from django.template import loader
 from django.http import HttpResponse
+from django.contrib import messages
+from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 @login_required
 def all_probs(request):
-    all_probs = problem.objects.all()
+    if request.method == 'GET':
 
-    context = {
-        'all_probs':all_probs,
-    }
+        all_probs = problem.objects.all()
 
-    template = loader.get_template('homescreen.html')
-    
-    return HttpResponse(template.render(context,request))
+        context = {
+            'all_probs':all_probs,
+        }
+
+        template = loader.get_template('homescreen.html')
+        
+        return HttpResponse(template.render(context,request))
+
+def logout_user(request):
+    logout(request)
+    messages.info(request,'logout successful')
+    return redirect('/auth/login/')

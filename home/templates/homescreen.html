@@ -8,8 +8,9 @@
     <meta name="description" content="" />
     <link rel="icon" href="favicon.png" />
   </head>
-  {% load static %}
-  <link rel="stylesheet" href="{% static 'style.css' %}">
+  {%load static%}
+  <link rel="stylesheet" href="{%static 'style.css'%}">
+
   <body>
     <div class=bck>
       <nav>
@@ -19,17 +20,17 @@
           <li><a href="#">About</a></li>
           <li><a href="#">Contact</a></li>
         </ul>
-        <button type="button">Logout</button>
+        <button type="submit" class="btn btn-primary">Logout</button>
       </nav>
       <div>
         <h1>Problem List</h1>
-        <ul>
+        <ul class>
           {% for prob in all_probs %}
 
-          <li><a href="/home/homescreen/{{problem.id}}/">{{prob}}</a></li>
+          <li><a href="../../compiler/{{prob}}/">{{prob}}</a></li>
 
           {% endfor %}
-        </ul>
+        <ul>
       </div>
     </div>
   </body>

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from compiler.forms import CodeSubmissionForm
+from home.models import problem
 from django.conf import settings
 import os
 import uuid
@@ -24,28 +25,13 @@ def submit(request):
     
     else:
         form = CodeSubmissionForm()
+        all_probs = problem.objects.all()
+        temp = []
+        for i in all_probs:
+            temp.append(i.question)
         context = {
             "form":form,
-        }
-    return render(request,"index.html",context)
-
-def judge(request):
-    if request.method == "POST":
-        form = CodeSubmissionForm(request.POST)
-        if form.is_valid():
-            test = form.save()
-            print(test.language)
-            print(test.code)
-            output = run_code(
-                test.language, test.code, test.testcases_input_data
-            )
-            test.tescases_output_data = output
-            test.save()
-            return render(request,"result.html",{"test":test})
-    else:
-        form = CodeSubmissionForm()
-        context = {
-            "form":form,
+            "all_probs": temp,
         }
     return render(request,"index.html",context)
 
@@ -110,3 +96,5 @@ def run_code(language,code,input_data):
 
     return output_data
         
+def judge_testcases():
+    pass

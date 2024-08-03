@@ -1,36 +1,35 @@
+<!DOCTYPE html>
 {% load crispy_forms_tags %}
-<html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" type="text/css" href ="https://bootswatch.com/5/lux/bootstrap.min.css">
+        <title>Compiler</title>
     </head>
-    <style>
-        div{
-            width: 50%;
-        }
-        
-        .container_1{
-            float: left;
-        }
-        
-        .container_2{
-            float: right;
-            width:50%;
-        }
-    </style>
-    <div class="container_1">
-         <h1>Question</h1>
-            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at sapien porttitor urna elementum lacinia. In
-            id magna pulvinar, ultricies lorem id, vehicula elit. Aliquam eu luctus nisl, vitae pellentesque magna. Phasellus
-            dolor metus, laoreet ac convallis sit amet, efficitur sed dolor. </p>
-    </div>
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'style.css'%}">
     
-    <div class="container_2">
-        <h1>Code Compiler</h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button type="submit">Run Code</button>
-            <button type="judge">JudgeIt</button>
-        </form>
-    </div>
+    <body>
+        <div class=bck>
+            <div class="container_1">
+            <h1>Question</h1>
+                <p> 
+                    {% for prob in all_probs %}
+                    <a"{{problem.question}}/">{{prob}}</a>
+                    {% endfor %}
+                </p>
+            </div>
+        
+            <div class="container_2">
+                <h1>Code Compiler</h1>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button type="submit">Run Code</button>
+                    <button type="judge">JudgeIt</button>
+                </form>
+            </div>
+        </div>
+    </body>
 </html>
