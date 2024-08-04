@@ -21,6 +21,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("auth/", include("loginstartup.urls")),
     path("homescreen/",include("home.urls")),
-    path("compiler/",include("compiler.urls")),
+    path("compiler/<str:pk>",include("compiler.urls")),
     path("",include("loginstartup.urls")),
-]
+]   

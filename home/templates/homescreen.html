@@ -25,9 +25,10 @@
       <div>
         <h1>Problem List</h1>
         <ul class>
+          {% csrf_token %}
           {% for prob in all_probs %}
 
-          <li><a href="../../compiler/{{prob}}/">{{prob}}</a></li>
+          <li><a href="../../compiler/{{prob}}">{{prob}}</a></li>
 
           {% endfor %}
         <ul>

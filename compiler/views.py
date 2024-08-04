@@ -9,13 +9,14 @@ import subprocess
 from pathlib import Path
 
 # Create your views here.
-def submit(request):
+def submit(request,pk):
     if request.method == "POST":
         form = CodeSubmissionForm(request.POST)
         if form.is_valid():
             submission = form.save()
             print(submission.language)
             print(submission.code)
+            # Business LOGIC (run_code)
             output = run_code(
                 submission.language, submission.code, submission.input_data
             )
@@ -26,14 +27,14 @@ def submit(request):
     else:
         form = CodeSubmissionForm()
         all_probs = problem.objects.all()
-        temp = []
-        for i in all_probs:
-            temp.append(i.question)
+        for prob in all_probs:
+            if pk == prob.statement:
+                ques = prob.question
         context = {
             "form":form,
-            "all_probs": temp,
+            "ques":ques,
         }
-    return render(request,"index.html",context)
+        return render(request,"index.html",context)
 
 def run_code(language,code,input_data):
     project_path = Path(settings.BASE_DIR)
